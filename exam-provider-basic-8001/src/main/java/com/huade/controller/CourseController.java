@@ -2,8 +2,6 @@ package com.huade.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huade.Utils.UtilTools;
 import com.huade.pojo.Course;
 import com.huade.service.CourseService;
@@ -64,7 +62,6 @@ public class CourseController {
     @ResponseBody
     public JSON updateCourseInfo(HttpSession session,@RequestParam("Id") String Id,@RequestParam("cou_Name") String cou_Name,@RequestParam("spe_Id") String spe_Id){
         JSONObject object = new JSONObject();
-        ObjectMapper mapper = new ObjectMapper();
         Course course = new Course(Id,cou_Name,spe_Id);
         if (session.getAttribute("login_session") != null) {
             if (courseService.updateCourseInfo(course) == 1) {
@@ -105,7 +102,6 @@ public class CourseController {
     @ResponseBody
     public JSON selectCourseInfo(HttpSession session,@RequestParam("spe_Id") String spe_Id,@RequestParam("current") int current,@RequestParam("length") int length){
         JSONObject object = new JSONObject();
-        ObjectMapper mapper = new ObjectMapper();
         if (session.getAttribute("login_session") != null) {
             if (courseService.selectCourseInfo(spe_Id, current, length) != null) {
                 object.put("code", 1);
