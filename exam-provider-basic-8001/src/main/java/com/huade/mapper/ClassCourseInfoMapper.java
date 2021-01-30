@@ -1,6 +1,7 @@
 package com.huade.mapper;
 
 import com.huade.pojo.ClassCourseInfo;
+import com.huade.pojo.View_Teacher_Class_Info;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -18,9 +19,9 @@ public interface ClassCourseInfoMapper {
     int updateClassCourseInfo (@Param("new_ClassCourseInfo") ClassCourseInfo new_ClassCourseInfo,
                                @Param("old_ClassCourseInfo") ClassCourseInfo old_ClassCourseInfo);
 
-    List<ClassCourseInfoMapper> selectAllClassCourseInfo(@Param("current")int current, @Param("length") int length);
+    List<View_Teacher_Class_Info> selectAllClassCourseInfo(@Param("current")int current, @Param("length") int length);
 
-    List<ClassCourseInfoMapper> selectClassCourseInfo(@Param("class_Id") String[] class_Id,
+    List<View_Teacher_Class_Info> selectClassCourseInfo(@Param("class_Id") String[] class_Id,
                                                       @Param("user_Id")String user_Id,
                                                       @Param("cou_Id")String cou_Id,
                                                       @Param("current")int current, @Param("length") int length);

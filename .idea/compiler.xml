@@ -9,6 +9,7 @@
         <module name="exam-provider-basic-8001" />
         <module name="exam-api" />
         <module name="exam-automatically_generation-8002" />
+        <module name="exam-consumer-basic-80" />
       </profile>
     </annotationProcessing>
   </component>

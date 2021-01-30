@@ -2,6 +2,7 @@ package com.huade.service;
 
 import com.huade.mapper.ClassCourseInfoMapper;
 import com.huade.pojo.ClassCourseInfo;
+import com.huade.pojo.View_Teacher_Class_Info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +34,12 @@ public class ClassCourseInfoServiceImpl implements ClassCourseInfoService {
     }
 
     @Override
-    public List<ClassCourseInfoMapper> selectAllClassCourseInfo(int current, int length) {
+    public List<View_Teacher_Class_Info> selectAllClassCourseInfo(int current, int length) {
         return classCourseInfoMapper.selectAllClassCourseInfo(current, length);
     }
 
     @Override
-    public List<ClassCourseInfoMapper> selectClassCourseInfo(String[] class_Id, String user_Id, String cou_Id, int current, int length) {
+    public List<View_Teacher_Class_Info> selectClassCourseInfo(String[] class_Id, String user_Id, String cou_Id, int current, int length) {
         return classCourseInfoMapper.selectClassCourseInfo(class_Id, user_Id, cou_Id, current, length);
     }
 }

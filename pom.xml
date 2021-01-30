@@ -11,6 +11,7 @@
         <module>exam-api</module>
         <module>exam-automatically_generation-8002</module>
         <module>exam-provider-basic-8001</module>
+        <module>exam-consumer-basic-80</module>
     </modules>
     <packaging>pom</packaging>
 

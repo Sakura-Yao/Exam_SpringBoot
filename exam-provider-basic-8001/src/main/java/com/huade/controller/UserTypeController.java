@@ -1,19 +1,15 @@
 package com.huade.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huade.pojo.User_Type;
 import com.huade.service.UserTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -24,42 +20,14 @@ public class UserTypeController {
 
     @RequestMapping("/SelectUserType_Id")
     @ResponseBody
-    public JSON selectUserType_Id(@RequestParam("Id")String Id, HttpSession session){
-        JSONObject object = new JSONObject();
-        if (session.getAttribute("login_session") != null) {
-            if (userTypeService.selectUserType_Id(Id) !=null){
-                object.put("code", 1);
-                object.put("message", "success");
-                object.put("data",userTypeService.selectUserType_Id(Id));
-            }else {
-                object.put("code", 0);
-                object.put("message", "未查询到该信息");
-            }
-        }else {
-            object.put("code",-1);
-            object.put("message","登录状态失效！请重新登录！");
-        }
-        return object;
+    public String selectUserType_Id(@RequestParam("Id")String Id){
+        return userTypeService.selectUserType_Id(Id);
     }
 
     @RequestMapping("/SelectAllUserType")
     @ResponseBody
-    public JSON selectAllUserType(HttpSession session){
-        JSONObject object = new JSONObject();
-        if (session.getAttribute("login_session") != null) {
-            if (userTypeService.selectAllUserType() !=null){
-                object.put("code", 1);
-                object.put("message", "success");
-                object.put("data",userTypeService.selectAllUserType());
-            }else {
-                object.put("code", 0);
-                object.put("message", "未查询到该信息");
-            }
-        }else {
-            object.put("code",-1);
-            object.put("message","登录状态失效！请重新登录！");
-        }
-        return object;
+    public List<User_Type> selectAllUserType(){
+        return userTypeService.selectAllUserType();
     }
 
 //    @RequestMapping("/AddUserType")
@@ -81,41 +49,23 @@ public class UserTypeController {
 
     @RequestMapping("/AddUserType")
     @ResponseBody
-    public JSON addUserType(HttpSession session,@RequestParam("user_Type")String user_Type){
-        JSONObject object = new JSONObject();
+    public int addUserType(@RequestParam("user_Type")String user_Type){
         User_Type user_type = new User_Type(UUID.randomUUID().toString().replace("-",""),user_Type);
-        if (session.getAttribute("login_session") != null) {
-            if (userTypeService.addUserType(user_type) == 1){
-                object.put("code", 1);
-                object.put("message", "用户类型添加成功");
-            }else {
-                object.put("code", 0);
-                object.put("message", "用户类型添加失败");
-            }
-        }else {
-            object.put("code",-1);
-            object.put("message","登录状态失效！请重新登录！");
-        }
-        return object;
+        return userTypeService.addUserType(user_type);
     }
 
     @RequestMapping("/DeleteUserType")
     @ResponseBody
-    public JSON deleteUserType(HttpSession session,@RequestParam("Id")String Id){
-        JSONObject object = new JSONObject();
-        if (session.getAttribute("login_session") != null) {
-            if (userTypeService.deleteUserType(Id) == 1){
-                object.put("code", 1);
-                object.put("message", "用户类型删除成功");
-            }else {
-                object.put("code", 0);
-                object.put("message", "用户类型删除失败");
-            }
-        }else {
-            object.put("code",-1);
-            object.put("message","登录状态失效！请重新登录！");
-        }
-        return object;
+    public int deleteUserType(@RequestParam("Id")String Id){
+        return userTypeService.deleteUserType(Id);
+    }
+
+    @RequestMapping("/UpdateUserType")
+    @ResponseBody
+    public int updateUserType(@RequestParam("Id")String Id,
+                              @RequestParam("user_Type")String user_Type){
+        User_Type user_type = new User_Type(Id,user_Type);
+        return userTypeService.updateUserType(user_type);
     }
 
 }

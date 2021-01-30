@@ -7,10 +7,6 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Accessors
 public class User implements Serializable {
 
     private String user_Id;

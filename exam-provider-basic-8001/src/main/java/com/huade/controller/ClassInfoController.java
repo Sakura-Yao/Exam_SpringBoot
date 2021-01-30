@@ -1,19 +1,16 @@
 package com.huade.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huade.pojo.ClassInfo;
+import com.huade.pojo.View_ClassInfo;
 import com.huade.service.ClassInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpSession;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/classInfo")
@@ -24,95 +21,39 @@ public class ClassInfoController {
     //ip:part/classInfo/addClassInfo
     @RequestMapping("/addClassInfo")
     @ResponseBody
-    public JSON addClassInfo(HttpSession session, @RequestParam("Id") String Id, @RequestParam("class_Id") String class_Id, @RequestParam("people_Num") String people_Num, @RequestParam("class_Col_Id") String class_Col_Id, @RequestParam("class_Spe_Id") String class_Spe_Id){
-        JSONObject object = new JSONObject();
+    public int addClassInfo( @RequestParam("class_Id") String class_Id, @RequestParam("people_Num") String people_Num, @RequestParam("class_Col_Id") String class_Col_Id, @RequestParam("class_Spe_Id") String class_Spe_Id){
+        String Id = UUID.randomUUID().toString().replace("-","");
         ClassInfo classInfo = new ClassInfo(Id,class_Id,people_Num,class_Col_Id,class_Spe_Id);
-        if(session.getAttribute("login_session") != null){
-            if (classInfoService.addClassInfo(classInfo) == 1){
-                object.put("code",1);
-                object.put("message","添加班级信息成功！");
-            }else {
-                object.put("code",0);
-                object.put("message","添加班级信息失败！");
-            }
-        }else {
-            object.put("code",-1);
-            object.put("message","登陆状态失效！请重新登录！");
-        }
-        return object;
+        return classInfoService.addClassInfo(classInfo);
     }
 
     @RequestMapping("/updateClassInfo")
     @ResponseBody
-    public JSON updateClassInfo(HttpSession session,@RequestParam("Id") String Id,@RequestParam("class_Id") String class_Id,@RequestParam("people_Num") String people_Num,@RequestParam("class_Col_Id") String class_Col_Id,@RequestParam("class_Spe_Id") String class_Spe_Id){
-        JSONObject object = new JSONObject();
+    public int updateClassInfo(@RequestParam("Id") String Id,@RequestParam("class_Id") String class_Id,@RequestParam("people_Num") String people_Num,@RequestParam("class_Col_Id") String class_Col_Id,@RequestParam("class_Spe_Id") String class_Spe_Id){
         ClassInfo classInfo = new ClassInfo(Id,class_Id,people_Num,class_Col_Id,class_Spe_Id);
-        if(session.getAttribute("login_session") != null){
-            if(classInfoService.updateClassInfo(classInfo) == 1){
-                object.put("code",1);
-                object.put("message","修改班级信息成功！");
-            }else{
-                object.put("code",0);
-                object.put("messgae","修改班级信息失败！");
-            }
-        }else {
-            object.put("code",-1);
-            object.put("message","登陆状态失效！请重新登录！");
-        }
-        return object;
+        return classInfoService.updateClassInfo(classInfo);
     }
 
     @RequestMapping("/deleteClassInfo")
     @ResponseBody
-    public JSON deleteClassInfo(HttpSession session, @RequestParam("Id") String Id){
-        JSONObject object = new JSONObject();
-        if(session.getAttribute("login_session") != null){
-            if(classInfoService.deleteClassInfo(Id) == 1){
-                object.put("code",1);
-                object.put("message","删除班级信息成功！");
-            }else {
-                object.put("code",0);
-                object.put("message","删除班级信息失败！");
-            }
-        }else {
-            object.put("code",-1);
-            object.put("message","登陆状态失效！请重新登录！");
-        }
-        return object;
+    public int deleteClassInfo(@RequestParam("Id") String Id){
+        return classInfoService.deleteClassInfo(Id);
     }
 
     @RequestMapping("/selectAllClassInfo")
     @ResponseBody
-    public JSON selectAllClassInfo(HttpSession session){
-        JSONObject object = new JSONObject();
-        if(session.getAttribute("login_session") != null){
-            object.put("code",1);
-            object.put("message","查询成功！");
-            object.put("data",classInfoService.selectAllClassInfo());
-        } else {
-            object.put("code",-1);
-            object.put("message","登陆状态失效！请重新登录！");
-        }
-        return object;
+    public List<View_ClassInfo> selectAllClassInfo(){
+        return classInfoService.selectAllClassInfo();
     }
 
     @RequestMapping("/selectClassInfo")
     @ResponseBody
-    public JSON selectClassInfo(HttpSession session,@RequestParam("Id")String Id,
+    public List<ClassInfo> selectClassInfo(@RequestParam("Id")String Id,
                                 @RequestParam("cou_Id")String cou_Id,
                                 @RequestParam("spe_Id")String spe_Id,
                                 @RequestParam("current")int current,
                                 @RequestParam("length")int length){
-        JSONObject object = new JSONObject();
-        if(session.getAttribute("login_session") != null){
-            object.put("code",1);
-            object.put("message","查询成功！");
-            object.put("data",classInfoService.selectClassInfo(Id,cou_Id,spe_Id,current,length));
-        } else {
-            object.put("code",-1);
-            object.put("message","登陆状态失效！请重新登录！");
-        }
-        return object;
+        return classInfoService.selectClassInfo(Id,cou_Id,spe_Id,current,length);
     }
 
 //    @RequestMapping("/selectAllClassInfo")
