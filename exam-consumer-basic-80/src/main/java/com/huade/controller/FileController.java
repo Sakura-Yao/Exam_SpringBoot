@@ -31,7 +31,7 @@ public class FileController {
             realName = getRealName(upfile.getOriginalFilename());
             uuidName = getUUIDFileName(upfile.getOriginalFilename());
 
-            realPath = "/Users/yaoyuan/Desktop/Exam/file/image";
+            realPath = "/Users/yaoyuan/Desktop/online_exam/file/image";
             InputStream in = new BufferedInputStream(upfile.getInputStream());
             OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(realPath,uuidName)));
             //读写

@@ -8,9 +8,14 @@
         <outputRelativeToContentRoot value="true" />
         <module name="exam-provider-basic-8001" />
         <module name="exam-api" />
+        <module name="exam-eureka-7000" />
         <module name="exam-automatically_generation-8002" />
         <module name="exam-consumer-basic-80" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="exam-eureka-7000" target="1.8" />
+      <module name="exam-eureka-server-7001" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -29,6 +29,7 @@
         <commons.codec.version>1.9</commons.codec.version>
         <fastjson.version>1.2.47</fastjson.version>
         <poi.ooXML.version>3.15</poi.ooXML.version>
+        <spring-cloud-dependencies.version>2020.0.0</spring-cloud-dependencies.version>
     </properties>
 
     <dependencyManagement>
@@ -44,7 +45,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Hoxton.SR1</version>
+                <version>2020.0.0</version>
                 <type>pom</type>
                 <scope>runtime</scope>
             </dependency>
