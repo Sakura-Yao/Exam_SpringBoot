@@ -48,8 +48,12 @@ public class ClassCourseInfoController {
 
     @RequestMapping("/selectClassCourseInfo")
     @ResponseBody
-    public List<View_Teacher_Class_Info> selectClassCourseInfo(@RequestParam("class_Id") String[] class_Id,@RequestParam("user_Id") String user_Id,@RequestParam("cou_Id") String cou_Id,@RequestParam("current") int current,@RequestParam("length") int length){
-        return classCourseInfoService.selectClassCourseInfo(class_Id,user_Id,cou_Id,current,length);
+    public List<View_Teacher_Class_Info> selectClassCourseInfo(@RequestParam("class_Id") String class_Id,@RequestParam("user_Id") String user_Id,@RequestParam("cou_Id") String cou_Id,@RequestParam("current") int current,@RequestParam("length") int length){
+        String[] class_Ids = new String[]{};
+        if (!class_Id.equals("")){
+            class_Ids = class_Id.split(",");
+        }
+        return classCourseInfoService.selectClassCourseInfo(class_Ids,user_Id,cou_Id,current,length);
     }
 
 

@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/classCourseInfo")
@@ -117,24 +119,21 @@ public class ClassCourseInfoController {
     }
     @RequestMapping("/selectClassCourseInfo")
     @ResponseBody
-        public JSON selectClassCourseInfo(HttpSession session,@RequestParam("class_Id") String[] class_Id,@RequestParam("user_Id") String user_Id,@RequestParam("cou_Id") String cou_Id,@RequestParam("current") int current,@RequestParam("length") int length){
+        public JSON selectClassCourseInfo(HttpSession session,@RequestParam("class_Id") String class_Id,@RequestParam("cou_Id") String cou_Id,@RequestParam("current") int current,@RequestParam("length") int length){
         JSONObject object = new JSONObject();
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
 
         if (session.getAttribute("login_session") != null){
-            User user = (User) session.getAttribute("login_session");
-            param.add("class_Id",class_Id);
-            param.add("user_Id",user.getUser_Id());
+            Object user = session.getAttribute("login_session");
+            Map<String,Object> map = (Map<String, Object>) user;
+            param.add("class_Id", class_Id);
+            param.add("user_Id",map.get("user_Id"));
+            param.add("cou_Id",cou_Id);
             param.add("current",current);
             param.add("length",length);
-            if (restTemplate.postForObject(REST_URL_PREFIX+"/selectClassCourseInfo",param,List.class) != null){
-                object.put("code",1);
-                object.put("message","查询成功");
-                object.put("data",restTemplate.postForObject(REST_URL_PREFIX+"/selectClassCourseInfo",param,List.class));
-            }else {
-                object.put("code",0);
-                object.put("message","未查询到任何信息");
-            }
+            object.put("code",1);
+            object.put("message","查询成功");
+            object.put("data",restTemplate.postForObject(REST_URL_PREFIX+"/selectClassCourseInfo",param,List.class));
         }else {
             object.put("code", -1);
             object.put("message", "登陆状态失效！请重新登录！");

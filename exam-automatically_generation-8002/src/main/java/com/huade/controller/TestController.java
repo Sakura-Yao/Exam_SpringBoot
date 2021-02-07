@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Controller
@@ -16,7 +17,8 @@ public class TestController {
 
     @RequestMapping("/test")
     @ResponseBody
-    public Paper test(@RequestParam("cou_Id")String cou_Id,
+    public Paper test(@RequestParam("ruleName")String ruleName,
+                      @RequestParam("cou_Id")String cou_Id,
                       @RequestParam("totalMark")String totalMark,
                       @RequestParam("difficulty")String difficulty,
                       @RequestParam("singleNum")String singleNum,
@@ -29,6 +31,8 @@ public class TestController {
         Rule rule = new Rule();
         rule.setId(UUID.randomUUID().toString().replace("-",""));
         rule.setExamId(UUID.randomUUID().toString().replace("-",""));
+        rule.setRule_Name(Objects.equals(ruleName, "") ?rule.getId():ruleName);
+        System.out.println(rule.getRule_Name());
         rule.setCou_Id(cou_Id);
         rule.setTotalMark(Double.parseDouble(totalMark));
         rule.setDifficulty(Double.parseDouble(difficulty));
@@ -54,8 +58,7 @@ public class TestController {
             rule.setSubjectScore(Double.parseDouble(subjectScore));
         }
         rule.setPointIds(pointIds);
-        Paper paper = GA.AutoMakePaper(rule);
-        return paper;
+        return GA.AutoMakePaper(rule);
     }
 
     @RequestMapping("/test1")

@@ -19,10 +19,10 @@ public class DateUtils {
      * @return String
      */
     public static String getNow_String(){
-        Date date_now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
-        String dateString = format.format(date_now);
-        return dateString;
+        Date date=new Date();   //这里的时util包下的
+        SimpleDateFormat temp=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  //这是24时
+        String Date=temp.format(date);
+        return Date;
     }
 
 }

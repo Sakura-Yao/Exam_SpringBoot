@@ -6,7 +6,6 @@
     <file url="file://$PROJECT_DIR$/exam-provider-basic-8001/src/main/resources/mybatis/mapper/ClassInfoMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/exam-provider-basic-8001/src/main/resources/mybatis/mapper/CollegeInfoMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/exam-provider-basic-8001/src/main/resources/mybatis/mapper/CourseMapper.xml" dialect="MySQL" />
-    <file url="file://$PROJECT_DIR$/exam-provider-basic-8001/src/main/resources/mybatis/mapper/ExamGenerateMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/exam-provider-basic-8001/src/main/resources/mybatis/mapper/KnowledgeMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/exam-provider-basic-8001/src/main/resources/mybatis/mapper/QuestionInfoMapper.xml" dialect="MySQL" />
     <file url="file://$PROJECT_DIR$/exam-provider-basic-8001/src/main/resources/mybatis/mapper/QuestionTimesMapper.xml" dialect="MySQL" />

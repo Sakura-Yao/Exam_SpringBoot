@@ -1,9 +1,7 @@
 package com.huade.pojo;
 
 import com.huade.service.QuestionInfoService;
-import com.huade.service.QuestionInfoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

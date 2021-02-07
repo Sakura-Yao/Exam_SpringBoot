@@ -9,6 +9,7 @@ public class Rule {
 
     private String Id;
     private String examId;
+    private String rule_Name;
     private String cou_Id;
     private double totalMark;
     private double difficulty;
@@ -19,6 +20,43 @@ public class Rule {
     private int subjectNum;
     private double subjectScore;
     private List<String> pointIds;
+    private String rule_Time;
+
+    public Rule() {
+    }
+
+    public Rule(String id, String examId, String rule_Name, String cou_Id, double totalMark, double difficulty, int singleNum, double singleScore, int completeNum, double completeScore, int subjectNum, double subjectScore, List<String> pointIds, String rule_Time) {
+        Id = id;
+        this.examId = examId;
+        this.rule_Name = rule_Name;
+        this.cou_Id = cou_Id;
+        this.totalMark = totalMark;
+        this.difficulty = difficulty;
+        this.singleNum = singleNum;
+        this.singleScore = singleScore;
+        this.completeNum = completeNum;
+        this.completeScore = completeScore;
+        this.subjectNum = subjectNum;
+        this.subjectScore = subjectScore;
+        this.pointIds = pointIds;
+        this.rule_Time = rule_Time;
+    }
+
+    public String getRule_Time() {
+        return rule_Time;
+    }
+
+    public void setRule_Time(String rule_Time) {
+        this.rule_Time = rule_Time;
+    }
+
+    public String getRule_Name() {
+        return rule_Name;
+    }
+
+    public void setRule_Name(String rule_Name) {
+        this.rule_Name = rule_Name;
+    }
 
     public String getCou_Id() {
         return cou_Id;

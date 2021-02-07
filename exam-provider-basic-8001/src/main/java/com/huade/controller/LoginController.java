@@ -19,7 +19,6 @@ public class LoginController {
     @RequestMapping("/UserLogin")
     @ResponseBody
     public User UserLogin(@RequestParam("user_Id")String user_Id, @RequestParam("password")String password){
-        System.out.println(userService.Login(user_Id, UtilTools.Encrypted_MD5(password)).getUser_Id());
         return userService.Login(user_Id, UtilTools.Encrypted_MD5(password));
     }
 

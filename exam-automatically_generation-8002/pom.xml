@@ -13,6 +13,13 @@
 
     <dependencies>
 
+<!--        父项目-->
+        <dependency>
+            <groupId>com.huade</groupId>
+            <artifactId>exam-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.apache.camel/camel-spring-boot-dependencies -->
         <dependency>
             <groupId>org.apache.camel</groupId>
