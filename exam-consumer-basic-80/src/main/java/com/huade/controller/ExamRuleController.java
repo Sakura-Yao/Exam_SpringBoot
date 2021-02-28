@@ -17,7 +17,7 @@ public class ExamRuleController {
     @Autowired
     private RestTemplate restTemplate;
 
-    private static final String REST_URL_PREFIX = "http://localhost:8001/ExamRule";
+    private static final String REST_URL_PREFIX = "http://localhost:8002/ExamRule";
 
     @RequestMapping("/addExamRule")
     @ResponseBody

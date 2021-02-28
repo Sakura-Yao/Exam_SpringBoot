@@ -8,7 +8,6 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Accessors
 public class QuestionInfo implements Serializable {
@@ -25,6 +24,21 @@ public class QuestionInfo implements Serializable {
     private String degree;
     private String kwl_Id;
     private String analysis;
+
+    public QuestionInfo(String id, String cou_Id, String type_Id, String subject, String choice_A, String choice_B, String choice_C, String choice_D, String answer, String degree, String kwl_Id, String analysis) {
+        Id = id;
+        this.cou_Id = cou_Id;
+        this.type_Id = type_Id;
+        this.subject = subject;
+        this.choice_A = choice_A;
+        this.choice_B = choice_B;
+        this.choice_C = choice_C;
+        this.choice_D = choice_D;
+        this.answer = answer;
+        this.degree = degree;
+        this.kwl_Id = kwl_Id;
+        this.analysis = analysis;
+    }
 
     public String getId() {
         return Id;

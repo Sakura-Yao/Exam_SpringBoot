@@ -22,8 +22,13 @@
         select * from online_exam.college
     </select>
 
-    <select id="selectCollegeInfo_col_Id" resultType="CollegeInfo">
-        select * from online_exam.college where Id =#{col_Id}
+    <select id="selectCollegeInfo" resultType="CollegeInfo">
+        select * from online_exam.college
+        <where>
+            <if test="col_Id != null and col_Id != ''">
+                and id = #{col_Id}
+            </if>
+        </where>
     </select>
 
     <select id="selectCol_Id" resultType="String">

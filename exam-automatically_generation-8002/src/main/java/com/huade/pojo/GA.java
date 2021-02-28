@@ -41,7 +41,7 @@ public class GA {
     public static Population evolvePopulation(Population pop, Rule rule){
         Population newPopulation = new Population();
         newPopulation.Population(pop.getLength());
-        int elitismOffset;
+        int elitismOffset=0;
         //精英主义
         if (elitism) {
             elitismOffset = 1;

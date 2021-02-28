@@ -6,8 +6,8 @@ public class View_Knowledge {
     private String cou_Id;
     private String cou_Name;
     private String kwl_Level;
-    private String chapter_Num;
-    private String section_Num;
+    private int chapter_Num;
+    private int section_Num;
     private String kwl_Name;
     private String parent_Id;
 
@@ -57,20 +57,20 @@ public class View_Knowledge {
         this.kwl_Level = kwl_Level;
     }
 
-    public String getChapter_Num() {
+    public int getChapter_Num() {
         return chapter_Num;
     }
 
     public void setChapter_Num(String chapter_Num) {
-        this.chapter_Num = chapter_Num;
+        this.chapter_Num = Integer.parseInt(chapter_Num);
     }
 
-    public String getSection_Num() {
+    public int getSection_Num() {
         return section_Num;
     }
 
     public void setSection_Num(String section_Num) {
-        this.section_Num = section_Num;
+        this.section_Num = Integer.parseInt(section_Num);
     }
 
     public String getKwl_Name() {
@@ -94,8 +94,8 @@ public class View_Knowledge {
         this.cou_Id = cou_Id;
         this.cou_Name = cou_Name;
         this.kwl_Level = kwl_Level;
-        this.chapter_Num = chapter_Num;
-        this.section_Num = section_Num;
+        this.chapter_Num = Integer.parseInt(chapter_Num);
+        this.section_Num = Integer.parseInt(section_Num);
         this.kwl_Name = kwl_Name;
         this.parent_Id = parent_Id;
     }

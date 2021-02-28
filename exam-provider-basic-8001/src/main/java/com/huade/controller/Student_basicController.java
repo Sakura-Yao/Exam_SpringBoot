@@ -38,7 +38,7 @@ public class Student_basicController {
                                  @RequestParam("stu_Specialty")String stu_Specialty){
             User user = new User(user_Id, UtilTools.Encrypted_MD5(password),user_Name,user_Type,user_Sex,user_Mobile);
             Student_Basic student_basic = new Student_Basic(user_Id,stu_ClassId,stu_College,stu_Specialty);
-            if (studentBasicService.addStudentBasic(student_basic) == 1 && userService.addUser(user) == 1)
+            if ( userService.addUser(user) == 1 && studentBasicService.addStudentBasic(student_basic) == 1)
                 return 1;
             else
                 return 0;
@@ -57,11 +57,20 @@ public class Student_basicController {
     @RequestMapping("/updateStudentBasic")
     @ResponseBody
     public int updateStudentBasic (@RequestParam("user_Id") String user_Id,
+                                   @RequestParam("user_Name") String user_Name,
+                                   @RequestParam("user_Type") String user_Type,
+                                   @RequestParam("user_Sex")String user_Sex,
+                                   @RequestParam("user_Mobile") String user_Mobile,
                                    @RequestParam("stu_ClassId") String stu_ClassId,
                                    @RequestParam("stu_College")String stu_College,
                                    @RequestParam("stu_Specialty")String stu_Specialty) {
-            Student_Basic student_basic = new Student_Basic(user_Id,stu_ClassId,stu_College,stu_Specialty);
-            return studentBasicService.updateStudentBasic(student_basic);
+        User user = new User(user_Id,"",user_Name,user_Type,user_Sex,user_Mobile);
+        Student_Basic student_basic = new Student_Basic(user_Id,stu_ClassId,stu_College,stu_Specialty);
+        if (userService.updateUser(user) == 1 && studentBasicService.updateStudentBasic(student_basic) == 1){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     @RequestMapping("/selectStudentBasic")
@@ -71,8 +80,9 @@ public class Student_basicController {
                                                       @RequestParam("class_Id")String class_Id,
                                                       @RequestParam("col_Id")String col_Id,
                                                       @RequestParam("spe_Id")String spe_Id,
-                                                      @RequestParam("current")int current, @RequestParam("length") int length) {
-        return studentBasicService.selectStudentBasic(user_Id,user_Name,class_Id,col_Id,spe_Id,current,length);
+                                                      @RequestParam("current")String current,
+                                                      @RequestParam("length") String length) {
+        return studentBasicService.selectStudentBasic(user_Id,user_Name,class_Id,col_Id,spe_Id,Integer.parseInt(current),Integer.parseInt(length));
     }
 
 

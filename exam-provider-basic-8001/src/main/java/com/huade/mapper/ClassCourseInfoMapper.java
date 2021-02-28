@@ -26,4 +26,11 @@ public interface ClassCourseInfoMapper {
                                                       @Param("cou_Id")String cou_Id,
                                                       @Param("current")int current, @Param("length") int length);
 
+    List<View_Teacher_Class_Info> selectAllTeachCourse(@Param("user_Id")String user_Id,
+                                                       @Param("cou_Name")String cou_Name);
+
+    List<View_Teacher_Class_Info> selectAllTeachClasses(@Param("user_Id")String user_Id);
+
+    List<String> selectTeachClasses_course(@Param("user_Id")String user_Id,
+                                   @Param("cou_Id")String cou_Id);
 }

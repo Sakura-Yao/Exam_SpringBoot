@@ -1,5 +1,7 @@
 package com.huade.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,12 +13,17 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 @Controller
 public class FileController {
+
+    private static final String UPLOAD_IMAGE_REALPATH = "/Users/yaoyuan/Desktop/online_exam/file/image/";
+    private static final String FILE_REALPATH = "/Users/yaoyuan/Desktop/online_exam/file/";
 
 //    @RequestMapping(value="/uploadImage",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @PostMapping("/uploadImage")
@@ -26,12 +33,10 @@ public class FileController {
         String realName = null;
         String uuidName = null;
         String realPath = null;
-
         try {
             realName = getRealName(upfile.getOriginalFilename());
             uuidName = getUUIDFileName(upfile.getOriginalFilename());
-
-            realPath = "/Users/yaoyuan/Desktop/online_exam/file/image";
+            realPath = UPLOAD_IMAGE_REALPATH;
             InputStream in = new BufferedInputStream(upfile.getInputStream());
             OutputStream out = new BufferedOutputStream(new FileOutputStream(new File(realPath,uuidName)));
             //读写
@@ -45,7 +50,7 @@ public class FileController {
             in.close();
             //IOUtils.copy(in,out);
             map.put("state", "SUCCESS");
-            map.put("url","/images/"+uuidName);
+            map.put("url","/api/images/"+uuidName);
             map.put("title",realName);
             map.put("original",realName);
         } catch (IOException e) {
@@ -140,28 +145,36 @@ public class FileController {
 
     @PostMapping("/upload")
     @ResponseBody
-    public String upload(@RequestParam("file") MultipartFile file) {
+    public JSON upload(@RequestParam("file") MultipartFile file) {
+        JSONObject object = new JSONObject();
         if (file.isEmpty()) {
-            return "上传失败，请选择文件";
+            object.put("code",0);
+            object.put("message","文件上传失败！");
+            return object;
         }
 
         String fileName = file.getOriginalFilename();
-        String filePath = "/Users/yaoyuan/Desktop/Exam/file";
-        File dest = new File(filePath + fileName);
+        String filePath = FILE_REALPATH;
+        Date date=new Date();   //这里的时util包下的
+        SimpleDateFormat temp=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ");
+        File dest = new File(filePath + temp.format(date) + fileName);
         try {
             file.transferTo(dest);
-
-            return "上传成功";
+            object.put("code",1);
+            object.put("message","文件上传成功！");
+            return object;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "上传失败！";
+        object.put("code",0);
+        object.put("message","文件上传失败！");
+        return object;
     }
 
     @RequestMapping("/download")
     public String downloads(HttpServletResponse response,
                             @Param("fileName")String fileName) throws Exception{
-        String path = "/Users/yaoyuan/Desktop/online_exam/file";
+        String path = FILE_REALPATH;
 
         //设置response响应头
         response.reset();

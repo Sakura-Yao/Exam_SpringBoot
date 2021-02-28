@@ -2,6 +2,7 @@ package com.huade.controller;
 
 import com.huade.pojo.Teacher_Basic;
 import com.huade.pojo.User;
+import com.huade.pojo.View_TeacherBasicInfo;
 import com.huade.service.TeacherBasicServiceImpl;
 import com.huade.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class Teacher_basicController {
                             @RequestParam("specialty_Id")String specialty_Id) {
         User user = new User(user_Id,password,user_Name,user_Type,user_Sex,user_Mobile);
         Teacher_Basic teacher_Basic = new Teacher_Basic(user_Id,college_Id,specialty_Id);
-        if (teacherBasicService.addTeacherBasicInfo(teacher_Basic)==1 && userService.addUser(user) == 1){
+        if (userService.addUser(user) == 1 && teacherBasicService.addTeacherBasicInfo(teacher_Basic)==1){
             return 1;
         }
         else {
@@ -56,21 +57,30 @@ public class Teacher_basicController {
     @RequestMapping("/updateTeacherBasicInfo")
     @ResponseBody
     public int updateTeacherBasicInfo (@RequestParam("user_Id") String user_Id,
+                                       @RequestParam("user_Name") String user_Name,
+                                       @RequestParam("user_Type") String user_Type,
+                                       @RequestParam("user_Sex")String user_Sex,
+                                       @RequestParam("user_Mobile") String user_Mobile,
                                        @RequestParam("college_Id") String college_Id,
                                        @RequestParam("specialty_Id")String specialty_Id){
-
+        User user = new User(user_Id, "", user_Name, user_Type, user_Sex, user_Mobile);
         Teacher_Basic teacher_Basic = new Teacher_Basic(user_Id,college_Id,specialty_Id);
-        return teacherBasicService.updateTeacherBasicInfo(teacher_Basic);
+        if (userService.updateUser(user)==1 && teacherBasicService.updateTeacherBasicInfo(teacher_Basic) == 1){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     @RequestMapping("/selectTeacher")
     @ResponseBody
-    public List<Teacher_Basic> selectTeacher (@RequestParam("user_Id")String user_Id,
-                                              @RequestParam("college_Id")String college_Id,
-                                              @RequestParam("specialty_Id")String specialty_Id,
-                                              @RequestParam("current")int current,
-                                              @RequestParam("length")int length) {
-        return teacherBasicService.selectTeacherBasic(user_Id,college_Id,specialty_Id,current,length);
+    public List<View_TeacherBasicInfo> selectTeacher (@RequestParam("user_Id")String user_Id,
+                                                      @RequestParam("user_Name")String user_Name,
+                                                      @RequestParam("col_Id")String col_Id,
+                                                      @RequestParam("spe_Id")String spe_Id,
+                                                      @RequestParam("current")String  current,
+                                                      @RequestParam("length")String length) {
+        return teacherBasicService.selectTeacherBasic(user_Id,user_Name,col_Id,spe_Id,Integer.parseInt(current),Integer.parseInt(length));
     }
 
 

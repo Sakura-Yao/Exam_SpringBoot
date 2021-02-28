@@ -1,5 +1,7 @@
 package com.huade.pojo;
 
+import javax.swing.text.View;
+
 public class View_Teacher_Class_Info {
 
     private String user_Id;
@@ -76,5 +78,23 @@ public class View_Teacher_Class_Info {
         this.class_Id = class_Id;
         this.cou_Id = cou_Id;
         this.cou_Name = cou_Name;
+    }
+
+    /**
+     * 用于获取某个教师教授的全部科目
+     * @param cou_Id
+     * @param cou_Name
+     */
+    public View_Teacher_Class_Info(String cou_Id,String cou_Name){
+        this.cou_Id = cou_Id;
+        this.cou_Name = cou_Name;
+    }
+
+    /**
+     * 用于获取某个教师教授的全部班级
+     * @param class_Id
+     */
+    public View_Teacher_Class_Info(String class_Id){
+        this.class_Id = class_Id;
     }
 }

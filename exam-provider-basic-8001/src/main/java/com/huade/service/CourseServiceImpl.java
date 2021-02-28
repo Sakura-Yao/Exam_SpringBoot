@@ -2,6 +2,7 @@ package com.huade.service;
 
 import com.huade.mapper.CourseMapper;
 import com.huade.pojo.Course;
+import com.huade.pojo.View_CourseInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<Course> selectCourseInfo(String spe_Id,int current, int length) {
-        return courseMapper.selectCourseInfo(spe_Id,current,length);
+    public List<View_CourseInfo> selectCourseInfo(String cou_Id,
+                                                  String cou_Name,
+                                                  String col_Id,
+                                                  String spe_Id,
+                                                  int current, int length) {
+        return courseMapper.selectCourseInfo(cou_Id, cou_Name, col_Id, spe_Id, current, length);
     }
 }

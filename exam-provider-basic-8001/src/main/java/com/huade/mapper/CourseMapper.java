@@ -1,6 +1,7 @@
 package com.huade.mapper;
 
 import com.huade.pojo.Course;
+import com.huade.pojo.View_CourseInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -22,6 +23,10 @@ public interface CourseMapper {
 
     List<Course> selectAllCourseInfo(@Param("current")int current,@Param("length") int length);
 
-    List<Course> selectCourseInfo(@Param("spe_Id")String spe_Id,@Param("current")int current,@Param("length") int length);
+    List<View_CourseInfo> selectCourseInfo(@Param("cou_Id")String cou_Id,
+                                           @Param("cou_Name")String cou_Name,
+                                           @Param("col_Id")String col_Id,
+                                           @Param("spe_Id")String spe_Id,
+                                           @Param("current")int current, @Param("length") int length);
 
 }

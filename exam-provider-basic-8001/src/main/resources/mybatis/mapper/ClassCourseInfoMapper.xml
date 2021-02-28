@@ -42,9 +42,32 @@
                 </foreach>
             </if>
         </where>
-        <if test="current != 0 and length != 0">
+        <if test="current != -1 and length != -1">
             LIMIT #{current},#{length};
         </if>
+    </select>
+
+    <select id="selectAllTeachCourse" resultType="View_Teacher_Class_Info">
+        select distinct online_exam.view_teacher_class_info.cou_Id, online_exam.view_teacher_class_info.cou_Name
+        from online_exam.view_teacher_class_info
+        <where>
+            online_exam.view_teacher_class_info.user_Id = #{user_Id}
+            <if test="cou_Name != null and cou_Name != ''">
+                and online_exam.view_teacher_class_info.cou_Name like "%"#{cou_Name}"%"
+            </if>
+        </where>
+    </select>
+    
+    <select id="selectAllTeachClasses" resultType="View_Teacher_Class_Info">
+        select distinct online_exam.view_teacher_class_info.class_Id
+        from online_exam.view_teacher_class_info
+        where online_exam.view_teacher_class_info.user_Id = #{user_Id}
+    </select>
+
+    <select id="selectTeachClasses_course" resultType="String">
+        select online_exam.view_teacher_class_info.class_Id
+        from online_exam.view_teacher_class_info
+        where user_Id = #{user_Id} and cou_Id = #{cou_Id}
     </select>
 
 </mapper>

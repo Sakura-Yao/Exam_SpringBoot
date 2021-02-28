@@ -123,21 +123,21 @@ public class ClassInfoController {
     @RequestMapping("/selectClassInfo")
     @ResponseBody
     public JSON selectClassInfo(HttpSession session,@RequestParam("Id")String Id,
-                                @RequestParam("cou_Id")String cou_Id,
+                                @RequestParam("col_Id")String col_Id,
                                 @RequestParam("spe_Id")String spe_Id,
-                                @RequestParam("current")int current,
-                                @RequestParam("length")int length){
+                                @RequestParam("current")String current,
+                                @RequestParam("length")String length){
         JSONObject object = new JSONObject();
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
         param.add("Id",Id);
-        param.add("cou_Id",cou_Id);
+        param.add("col_Id",col_Id);
         param.add("spe_Id",spe_Id);
         param.add("current",current);
         param.add("length",length);
         if(session.getAttribute("login_session") != null){
             object.put("code",1);
             object.put("message","查询成功！");
-            object.put("data",restTemplate.postForEntity(REST_URL_PREFIX+"/selectClassInfo",param,List.class));
+            object.put("data",restTemplate.postForObject(REST_URL_PREFIX+"/selectClassInfo",param,List.class));
         } else {
             object.put("code",-1);
             object.put("message","登陆状态失效！请重新登录！");

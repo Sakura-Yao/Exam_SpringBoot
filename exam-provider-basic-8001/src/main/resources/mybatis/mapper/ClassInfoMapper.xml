@@ -30,23 +30,41 @@
         select * from online_exam.view_class_info
     </select>
 
-    <select id="selectClassInfo" resultType="View_ClassInfo">
-        select * from online_exam.view_class_info
+    <select id="selectClassInfo" resultType="ClassInfo">
+        select * from online_exam.classes
         <where>
             <if test="Id != null and Id != ''">
-                and Id = #{Id}
+                and Id =#{Id}
             </if>
             <if test="col_Id != null and col_Id != ''">
-                and col_Name = (select col_Name from online_exam.college where Id=#{col_Id})
+                and class_Col_Id =#{col_Id}
             </if>
             <if test="spe_Id != null and spe_Id != ''">
-                and spe_Name = (select spe_Name from online_exam.specialty where Id=#{spe_Id})
+                and class_Spe_Id =#{spe_Id}
             </if>
         </where>
-        <if test="current != 0 and length != 0">
+        <if test="current != -1 and length != -1">
             LIMIT #{current},#{length};
         </if>
     </select>
+
+<!--    <select id="selectClassInfo" resultType="View_ClassInfo">-->
+<!--        select * from online_exam.view_class_info-->
+<!--        <where>-->
+<!--            <if test="Id != null and Id != ''">-->
+<!--                and Id = #{Id}-->
+<!--            </if>-->
+<!--            <if test="col_Id != null and col_Id != ''">-->
+<!--                and col_Name = (select col_Name from online_exam.college where Id=#{col_Id})-->
+<!--            </if>-->
+<!--            <if test="spe_Id != null and spe_Id != ''">-->
+<!--                and spe_Name = (select spe_Name from online_exam.specialty where Id=#{spe_Id})-->
+<!--            </if>-->
+<!--        </where>-->
+<!--        <if test="current != 0 and length != 0">-->
+<!--            LIMIT #{current},#{length};-->
+<!--        </if>-->
+<!--    </select>-->
 
     <select id="selectId" resultType="String">
         select Id from online_exam.classes where class_Id = #{class_Id}

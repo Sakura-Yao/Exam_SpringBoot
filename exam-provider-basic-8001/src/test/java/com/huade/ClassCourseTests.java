@@ -16,4 +16,7 @@ public class ClassCourseTests {
         System.out.println(service.selectAllClassCourseInfo(0,0).size());
     }
 
+    @Test
+    void selectAllTeachCourse() {
+    }
 }

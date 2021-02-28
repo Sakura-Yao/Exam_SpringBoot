@@ -41,16 +41,16 @@
                 and user_Name like "%"#{user_Name}"%"
             </if>
             <if test="class_Id != null and class_Id != ''">
-                and class_Id = #{class_Id}
+                and classes_Id = #{class_Id}
             </if>
             <if test="col_Id != null and col_Id != ''">
-                and col_Name = (select col_Name from college where Id=#{col_Id})
+                and col_Id=#{col_Id}
             </if>
             <if test="spe_Id != null and spe_Id != ''">
-                and spe_Name = (select spe_Name from specialty where Id=#{spe_Id})
+                and spe_Id=#{spe_Id}
             </if>
         </where>
-        <if test="current != 0 and length != 0">
+        <if test="current != -1 and length != -1">
             LIMIT #{current},#{length};
         </if>
     </select>

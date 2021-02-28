@@ -49,11 +49,11 @@ public class ClassInfoController {
     @RequestMapping("/selectClassInfo")
     @ResponseBody
     public List<ClassInfo> selectClassInfo(@RequestParam("Id")String Id,
-                                @RequestParam("cou_Id")String cou_Id,
+                                @RequestParam("col_Id")String col_Id,
                                 @RequestParam("spe_Id")String spe_Id,
-                                @RequestParam("current")int current,
-                                @RequestParam("length")int length){
-        return classInfoService.selectClassInfo(Id,cou_Id,spe_Id,current,length);
+                                @RequestParam("current")String current,
+                                @RequestParam("length")String length){
+        return classInfoService.selectClassInfo(Id,col_Id,spe_Id,Integer.parseInt(current),Integer.parseInt(length));
     }
 
 //    @RequestMapping("/selectAllClassInfo")

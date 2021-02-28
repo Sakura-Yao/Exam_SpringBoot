@@ -5,8 +5,8 @@ public class Knowledge {
     private String Id;
     private String cou_Id;
     private String kwl_Level;
-    private String chapter_Num;
-    private String section_Num;
+    private int chapter_Num;
+    private int section_Num;
     private String kwl_Name;
     private String parent_Id;
 
@@ -48,19 +48,19 @@ public class Knowledge {
     }
 
     public String getChapter_Num() {
-        return chapter_Num;
+        return String.valueOf(chapter_Num);
     }
 
     public void setChapter_Num(String chapter_Num) {
-        this.chapter_Num = chapter_Num;
+        this.chapter_Num = Integer.parseInt(chapter_Num);
     }
 
     public String getSection_Num() {
-        return section_Num;
+        return String.valueOf(section_Num);
     }
 
     public void setSection_Num(String section_Num) {
-        this.section_Num = section_Num;
+        this.section_Num = Integer.parseInt(section_Num);
     }
 
     public String getKwl_Name() {
@@ -83,8 +83,8 @@ public class Knowledge {
         Id = id;
         this.cou_Id = cou_Id;
         this.kwl_Level = kwl_Level;
-        this.chapter_Num = chapter_Num;
-        this.section_Num = section_Num;
+        this.chapter_Num = Integer.parseInt(chapter_Num);
+        this.section_Num = Integer.parseInt(section_Num);
         this.kwl_Name = kwl_Name;
         this.parent_Id = parent_Id;
     }

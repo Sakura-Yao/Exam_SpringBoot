@@ -34,20 +34,23 @@
         </if>
     </select>
 
-    <select id="selectTeacherBasic" resultType="Teacher_Basic">
-        select * from online_exam.teacher_basic
+    <select id="selectTeacherBasic" resultType="View_TeacherBasicInfo">
+        select * from online_exam.view_teacher_basic_info
         <where>
             <if test="user_Id != null and user_Id != ''">
                 and user_Id = #{user_Id}
             </if>
+            <if test="user_Name != null and user_Name != ''">
+                and user_Name like "%"#{user_Name}"%"
+            </if>
             <if test="col_Id != null and col_Id != ''">
-                and college_Id = #{col_Id}
+                and col_Id = #{col_Id}
             </if>
             <if test="spe_Id != null and spe_Id != ''">
-                and specialty_Id = #{spe_Id}
+                and spe_Id = #{spe_Id}
             </if>
         </where>
-        <if test="current != 0 and length != 0">
+        <if test="current != -1 and length != -1">
             LIMIT #{current},#{length};
         </if>
     </select>

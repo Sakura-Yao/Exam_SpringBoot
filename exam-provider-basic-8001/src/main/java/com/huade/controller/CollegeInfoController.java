@@ -44,10 +44,6 @@ public class CollegeInfoController {
         return collegeInfoService.selectAllCollegeInfo();
     }
 
-    @RequestMapping("selectByCol_Id")
-    @ResponseBody
-    public CollegeInfo SelectBycol_Id(@RequestParam("col_Id") String col_Id){
-       return collegeInfoService.selectCollegeInfo_col_Id(col_Id);
-    }
+
 
 }

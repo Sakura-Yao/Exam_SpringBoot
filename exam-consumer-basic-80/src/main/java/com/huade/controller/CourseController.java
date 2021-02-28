@@ -112,9 +112,17 @@ public class CourseController {
 
     @RequestMapping("/selectCourseInfo")
     @ResponseBody
-    public JSON selectCourseInfo(HttpSession session,@RequestParam("spe_Id") String spe_Id,@RequestParam("current") int current,@RequestParam("length") int length){
+    public JSON selectCourseInfo(HttpSession session,
+                                 @RequestParam("cou_Id")String cou_Id,
+                                 @RequestParam("cou_Name")String cou_Name,
+                                 @RequestParam("col_Id")String col_Id,
+                                 @RequestParam("spe_Id") String spe_Id,
+                                 @RequestParam("current") String current, @RequestParam("length") String length){
         JSONObject object = new JSONObject();
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
+        param.add("cou_Id",cou_Id);
+        param.add("cou_Name",cou_Name);
+        param.add("col_Id",col_Id);
         param.add("spe_Id",spe_Id);
         param.add("current",current);
         param.add("length",length);

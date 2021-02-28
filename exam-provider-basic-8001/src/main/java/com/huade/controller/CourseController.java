@@ -2,6 +2,7 @@ package com.huade.controller;
 
 import com.huade.Utils.UtilTools;
 import com.huade.pojo.Course;
+import com.huade.pojo.View_CourseInfo;
 import com.huade.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,8 +46,12 @@ public class CourseController {
 
     @RequestMapping("/selectCourseInfo")
     @ResponseBody
-    public List<Course> selectCourseInfo(@RequestParam("spe_Id") String spe_Id,@RequestParam("current") int current,@RequestParam("length") int length){
-        return courseService.selectCourseInfo(spe_Id, current, length);
+    public List<View_CourseInfo> selectCourseInfo(@RequestParam("cou_Id")String cou_Id,
+                                                  @RequestParam("cou_Name")String cou_Name,
+                                                  @RequestParam("col_Id")String col_Id,
+                                                  @RequestParam("spe_Id") String spe_Id,
+                                                  @RequestParam("current") String current, @RequestParam("length") String length){
+        return courseService.selectCourseInfo(cou_Id,cou_Name,col_Id,spe_Id, Integer.parseInt(current), Integer.parseInt(length));
     }
 
 

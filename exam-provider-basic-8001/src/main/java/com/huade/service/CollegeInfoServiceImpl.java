@@ -38,8 +38,8 @@ public class CollegeInfoServiceImpl implements CollegeInfoService {
     }
 
     @Override
-    public CollegeInfo selectCollegeInfo_col_Id(String col_Id) {
-        return collegeInfoMapper.selectCollegeInfo_col_Id(col_Id);
+    public List<CollegeInfo> selectCollegeInfo(String col_Id) {
+        return collegeInfoMapper.selectCollegeInfo(col_Id);
     }
 
     @Override

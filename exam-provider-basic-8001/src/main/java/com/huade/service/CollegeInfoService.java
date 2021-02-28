@@ -14,7 +14,7 @@ public interface CollegeInfoService {
 
     List<CollegeInfo> selectAllCollegeInfo();
 
-    CollegeInfo selectCollegeInfo_col_Id(String col_Id);
+    List<CollegeInfo> selectCollegeInfo(String col_Id);
 
     String selectCol_Id(String col_Name);
 

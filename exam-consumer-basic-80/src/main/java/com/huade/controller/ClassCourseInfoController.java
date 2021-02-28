@@ -3,6 +3,7 @@ package com.huade.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huade.pojo.User;
+import com.huade.pojo.View_Teacher_Class_Info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
@@ -24,6 +25,7 @@ public class ClassCourseInfoController {
     private RestTemplate restTemplate;
 
     private static final String REST_URL_PREFIX = "http://localhost:8001/classCourseInfo";
+    private static final String REST_BASIC_URL_PREFIX = "http://localhost:8001/basic";
 
     @RequestMapping("/addClassCourseInfo")
     @ResponseBody
@@ -141,6 +143,52 @@ public class ClassCourseInfoController {
         return object;
     }
 
+    @RequestMapping("/teachCourseClasses")
+    @ResponseBody
+    public JSON TeachCourseClasses (HttpSession session){
+        JSONObject object = new JSONObject();
+        MultiValueMap<String, Object> course_param = new LinkedMultiValueMap<>();
+        if (session.getAttribute("login_session") != null) {
+            Object user = session.getAttribute("login_session");
+            Map<String,Object> map = (Map<String, Object>) user;
+            course_param.add("user_Id",map.get("user_Id"));
+            List<View_Teacher_Class_Info> courses = restTemplate.postForObject(REST_BASIC_URL_PREFIX + "/selectAllTeachCourse", course_param, List.class);
+            object.put("code",1);
+            object.put("data",courses);
+        }else {
+            object.put("code", -1);
+            object.put("message", "登陆状态失效！请重新登录！");
+        }
+        return object;
+    }
+    @RequestMapping("/selectDistributionInfo")
+    @ResponseBody
+    public JSON selectDistributionInfo(HttpSession session,
+                                       @RequestParam("user_Id")String user_Id,
+                                       @RequestParam("class_Id") String class_Id,
+                                       @RequestParam("cou_Id") String cou_Id,
+                                       @RequestParam("current") String current,
+                                       @RequestParam("length") String length){
+        JSONObject object = new JSONObject();
+        MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
+
+        if (session.getAttribute("login_session") != null){
+            Object user = session.getAttribute("login_session");
+            Map<String,Object> map = (Map<String, Object>) user;
+            param.add("class_Id", class_Id);
+            param.add("user_Id",user_Id);
+            param.add("cou_Id",cou_Id);
+            param.add("current",Integer.parseInt(current));
+            param.add("length",Integer.parseInt(length));
+            object.put("code",1);
+            object.put("message","查询成功");
+            object.put("data",restTemplate.postForObject(REST_URL_PREFIX+"/selectClassCourseInfo",param,List.class));
+        }else {
+            object.put("code", -1);
+            object.put("message", "登陆状态失效！请重新登录！");
+        }
+        return object;
+    }
 
 
 }

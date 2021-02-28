@@ -19,6 +19,37 @@
         where Id=#{Id}
     </update>
 
+    <select id="selectQuestionInfo_Id" resultType="QuestionInfo">
+        select * from online_exam.question where Id = #{Id}
+    </select>
+
+    <select id="selectQuestionInfo_keyWords" resultType="View_Question_Info">
+        select * from online_exam.view_question_info
+        <where>
+            <if test="question_Id != null and question_Id != ''">
+                and Id = #{question_Id}
+            </if>
+            <if test="cou_Id != null and cou_Id != ''">
+                and cou_Id = #{cou_Id}
+            </if>
+            <if test="type_Id != null and type_Id != ''">
+                and type_Id = #{type_Id}
+            </if>
+            <if test="subject != null and subject != ''">
+                and `subject` like "%"#{subject}"%"
+            </if>
+            <if test="degree != null and degree != ''">
+                and question_Id = #{question_Id}
+            </if>
+            <if test="kwl_Id != null and kwl_Id != ''">
+                and kwl_Id = #{kwl_Id}
+            </if>
+        </where>
+        <if test="current != -1 and length != -1">
+            LIMIT #{current},#{length};
+        </if>
+    </select>
+
     <select id="selectQuestionInfo" resultType="QuestionInfo">
         select * from online_exam.question
         <where>

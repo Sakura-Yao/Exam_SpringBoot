@@ -1,6 +1,7 @@
 package com.huade.mapper;
 
 import com.huade.pojo.Teacher_Basic;
+import com.huade.pojo.View_TeacherBasicInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -23,9 +24,10 @@ public interface TeacherBasicMapper {
     
     List<Teacher_Basic> selectAllTeacherBasic(@Param("current")int current,@Param("length") int length);
     
-    List<Teacher_Basic> selectTeacherBasic(@Param("user_Id")String user_Id,
-                                           @Param("col_Id")String col_Id,
-                                           @Param("spe_Id")String spe_Id,
-                                           @Param("current")int current,@Param("length") int length);
+    List<View_TeacherBasicInfo> selectTeacherBasic(@Param("user_Id")String user_Id,
+                                                   @Param("user_Name")String user_Name,
+                                                   @Param("col_Id")String col_Id,
+                                                   @Param("spe_Id")String spe_Id,
+                                                   @Param("current")int current, @Param("length") int length);
     
 }

@@ -26,7 +26,6 @@ public class Teacher_basicController {
     @ResponseBody
     public JSON addTeacher (HttpSession session,
                             @RequestParam("user_Id") String user_Id,
-                            @RequestParam("password") String password,
                             @RequestParam("user_Name") String user_Name,
                             @RequestParam("user_Type") String user_Type,
                             @RequestParam("user_Sex")String user_Sex,
@@ -36,7 +35,7 @@ public class Teacher_basicController {
         JSONObject object = new JSONObject();
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
         param.add("user_Id",user_Id);
-        param.add("password",password);
+        param.add("password","123456");
         param.add("user_Name",user_Name);
         param.add("user_Type",user_Type);
         param.add("user_Sex",user_Sex);
@@ -87,12 +86,20 @@ public class Teacher_basicController {
     @RequestMapping("/updateTeacherBasicInfo")
     @ResponseBody
     public JSON updateTeacherBasicInfo (HttpSession session,
-                                          @RequestParam("user_Id") String user_Id,
-                                          @RequestParam("college_Id") String college_Id,
-                                          @RequestParam("specialty_Id")String specialty_Id){
+                                        @RequestParam("user_Id") String user_Id,
+                                        @RequestParam("user_Name") String user_Name,
+                                        @RequestParam("user_Type") String user_Type,
+                                        @RequestParam("user_Sex")String user_Sex,
+                                        @RequestParam("user_Mobile") String user_Mobile,
+                                        @RequestParam("college_Id") String college_Id,
+                                        @RequestParam("specialty_Id")String specialty_Id){
         JSONObject object = new JSONObject();
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
         param.add("user_Id",user_Id);
+        param.add("user_Name",user_Name);
+        param.add("user_Type",user_Type);
+        param.add("user_Sex",user_Sex);
+        param.add("user_Mobile",user_Mobile);
         param.add("college_Id",college_Id);
         param.add("specialty_Id",specialty_Id);
         if (session.getAttribute("login_session") != null) {
@@ -116,15 +123,17 @@ public class Teacher_basicController {
     @ResponseBody
     public JSON selectTeacher (HttpSession session,
                                @RequestParam("user_Id")String user_Id,
-                               @RequestParam("college_Id")String college_Id,
-                               @RequestParam("specialty_Id")String specialty_Id,
-                               @RequestParam("current")int current,
-                               @RequestParam("length")int length) {
+                               @RequestParam("user_Name")String user_Name,
+                               @RequestParam("col_Id")String col_Id,
+                               @RequestParam("spe_Id")String spe_Id,
+                               @RequestParam("current")String current,
+                               @RequestParam("length")String length) {
         JSONObject object = new JSONObject();
         MultiValueMap<String, Object> param = new LinkedMultiValueMap<>();
         param.add("user_Id",user_Id);
-        param.add("college_Id",college_Id);
-        param.add("specialty_Id",specialty_Id);
+        param.add("user_Name",user_Name);
+        param.add("col_Id",col_Id);
+        param.add("spe_Id",spe_Id);
         param.add("current",current);
         param.add("length",length);
         if (session.getAttribute("login_session") != null) {

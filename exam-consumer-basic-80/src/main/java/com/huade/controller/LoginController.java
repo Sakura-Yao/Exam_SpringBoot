@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.huade.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -15,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpSession;
 
 @Controller
+@ResponseBody
 public class LoginController {
 
     @Autowired

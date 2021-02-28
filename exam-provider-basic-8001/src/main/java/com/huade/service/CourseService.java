@@ -1,6 +1,7 @@
 package com.huade.service;
 
 import com.huade.pojo.Course;
+import com.huade.pojo.View_CourseInfo;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,10 @@ public interface CourseService {
 
     List<Course> selectAllCourseInfo(int current, int length);
 
-    List<Course> selectCourseInfo(String spe_Id,int current,int length);
+    List<View_CourseInfo> selectCourseInfo(String cou_Id,
+                                           String cou_Name,
+                                           String col_Id,
+                                           String spe_Id,
+                                           int current, int length);
 
 }

@@ -68,6 +68,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <executable>true</executable>
                     <mainClass>com.huade.ConsumerBasic</mainClass>
                 </configuration>
             </plugin>

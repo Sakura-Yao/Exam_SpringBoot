@@ -19,7 +19,7 @@ public interface CollegeInfoMapper {
 
     List<CollegeInfo> selectAllCollegeInfo();
 
-    CollegeInfo selectCollegeInfo_col_Id(@Param("col_Id")String col_Id);
+    List<CollegeInfo> selectCollegeInfo(@Param("col_Id")String col_Id);
 
     String selectCol_Id(@Param("col_Name")String col_Name);
 }
